@@ -8,8 +8,6 @@ Add OAuth2 authentication to CTFd 2.x using compatible providers. Users can be l
 
 ## Supported Providers:
 * `azure` (Azure Active Directory)
-* `github` (GitHub)
-* ... and any other Flask-Dance provider, with a little work!
 
 ## Configuration
 The following configuration options must be defined in `config.py`:
@@ -18,6 +16,7 @@ OAUTHLOGIN_CLIENT_ID - OAuth2 Provider Client ID
 OAUTHLOGIN_CLIENT_SECRET - OAuth2 Provider Client Secret
 OAUTHLOGIN_PROVIDER - OAuth2 Provider name (see 'Supported Providers' above)
 OAUTHLOGIN_CREATE_MISSING_USER - If the plugin should create a CTFd user to link to the OAuth2 user
+OAUTHLOGIN_TENANT_ID - The Azure tenantId 
 ```
 
 ## Extensibility:
