@@ -2,7 +2,9 @@
 
 Add OAuth2 authentication to CTFd 2.x using compatible providers. Users can be linked between the CTFd User database and the OAuth provider; these users can be created on the fly or not.
 
-**This plugin is still in development and may not work properly in your configuration.**
+
+
+**This plugin has been modified to be a dependency of CTFd-subscriptions, it will not work without.**
 
 ✅ `Flask-Dance` is required.
 
@@ -39,6 +41,7 @@ provider_users = {
     'azure': lambda: 
         get_bridge_user(
             displayName=flask_dance.contrib.azure.azure.get("/v1.0/me").json()["displayName"],
-            email=flask_dance.contrib.azure.azure.get("/v1.0/me").json()["userPrincipalName"])
+            email=flask_dance.contrib.azure.azure.get("/v1.0/me").json()["userPrincipalName"],
+            subscription=flask_dance.contrib.azure.azure.get("/v1.0/me").json()["jobTitle"])
 }
 ```
