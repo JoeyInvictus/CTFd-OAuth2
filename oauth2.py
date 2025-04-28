@@ -77,7 +77,7 @@ def load(app):
         return create_or_get_user(
             username=user_info["userPrincipalName"],
             displayName=user_info["displayName"],
-            subscription = subscription)
+            subscription=subscription.lower()) #make lowercase so it matches the lower case scheme 
 
     provider_users = {
         'azure': lambda: get_azure_user()
