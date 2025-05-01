@@ -34,8 +34,10 @@ def load(app):
             log('logins', "[{date}] {ip} - " + username + " - No OAuth2 bridged user found, creating user")
             user = Users(email=username, name=displayName.strip(), subscription_level=subscription)
             db.session.add(user)
-            db.session.commit()
             db.session.flush()
+            user_id = user.id
+            db.session.commit()
+            user = Users.query.get(user_id)
             return user
     def create_or_get_user(username, displayName, subscription):
         '''With the current setup a users' membership is evaluated at every login.
