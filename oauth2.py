@@ -34,8 +34,11 @@ def load(app):
             log('logins', "[{date}] {ip} - " + username + " - No OAuth2 bridged user found, creating user")
             user = Users(email=username, name=displayName.strip(), subscription_level=subscription)
             db.session.add(user)
-            db.session.commit()
             db.session.flush()
+            # we fixed a bug where an id would be unreferenced. We fix this by getting the user id before committing
+            user_id = user.id
+            db.session.commit()
+            user = Users.query.get(user_id)
             return user
     def create_or_get_user(username, displayName, subscription):
         '''With the current setup a users' membership is evaluated at every login.
@@ -77,7 +80,7 @@ def load(app):
         return create_or_get_user(
             username=user_info["userPrincipalName"],
             displayName=user_info["displayName"],
-            subscription = subscription)
+            subscription=subscription.lower()) #make lowercase so it matches the lower case scheme 
 
     provider_users = {
         'azure': lambda: get_azure_user()
