@@ -35,6 +35,7 @@ def load(app):
             user = Users(email=username, name=displayName.strip(), subscription_level=subscription)
             db.session.add(user)
             db.session.flush()
+            # we fixed a bug where an id would be unreferenced. We fix this by getting the user id before committing
             user_id = user.id
             db.session.commit()
             user = Users.query.get(user_id)
