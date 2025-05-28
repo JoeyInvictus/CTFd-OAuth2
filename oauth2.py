@@ -2,15 +2,17 @@ from flask import session, redirect
 from flask_dance.contrib import azure
 import flask_dance.contrib
 
-from CTFd.auth import confirm, register, reset_password, login
 from CTFd.models import db, Users
 from CTFd.utils import set_config
 from CTFd.utils.logging import log
-from CTFd.utils.security.auth import login_user, logout_user
+from CTFd.utils.security.auth import login_user
 
 from CTFd import utils
 
 def load(app):
+    '''
+    This function is called when the plugin is loaded
+    '''
     ########################
     # Plugin Configuration #
     ########################
