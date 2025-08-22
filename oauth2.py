@@ -101,6 +101,7 @@ def load(app):
         provider_user = provider_users[oauth_provider]() # Resolved lambda
         session.regenerate()
         if provider_user is not None:
+            provider_user = db.session.merge(provider_user)
             login_user(provider_user)
         return redirect('/')
 
