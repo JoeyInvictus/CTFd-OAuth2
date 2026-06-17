@@ -23,6 +23,9 @@ def load(app):
     create_missing_user = utils.get_app_config('OAUTHLOGIN_CREATE_MISSING_USER')
     tenant_id = utils.get_app_config('OAUTHLOGIN_TENANT_ID')
 
+    if not oauth_provider:
+        return
+
     ##################
     # User Functions #
     ##################
